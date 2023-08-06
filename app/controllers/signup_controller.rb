@@ -1,3 +1,5 @@
+require 'swagger_client'
+
 class SignupController < ApplicationController
   before_action :require_logged_in_user, :check_new_users, :check_can_invite, :only => :invite
   before_action :check_for_read_only_mode, :show_title_h1
@@ -68,9 +70,23 @@ class SignupController < ApplicationController
       flash[:success] = "Welcome to #{Rails.application.name}, " <<
                         "#{@new_user.username}!"
 
-      if Rails.application.allow_new_users_to_invite?
-        return redirect_to signup_invite_path
-      else
+                         api_instance = SwaggerClient::DefaultApi.new
+       body = SwaggerClient::RegisterPrincipal.new() # RegisterPrincipal |
+       body.pw = params[:user][:password].to_s
+       body.uid = @new_user.id.to_s
+
+       begin
+         result = api_instance.apiproxy_register_principal(body)
+         p result
+         RegisterNotification.notify(@new_user, result.share).deliver_now
+       rescue SwaggerClient::ApiError => e
+         puts "Exception when calling DefaultApi->apiproxy_register_principal: #{e}"
+       end
+
+      # XXX LYT This is only set in Lobsters production instances, just redirect to root
+      #if Rails.application.allow_new_users_to_invite?
+        #return redirect_to signup_invite_path
+      #else
         return redirect_to root_path
       end
     else

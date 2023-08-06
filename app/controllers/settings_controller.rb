@@ -1,3 +1,5 @@
+require 'swagger_client'
+
 class SettingsController < ApplicationController
   before_action :require_logged_in_user, :show_title_h1
 
@@ -9,8 +11,41 @@ class SettingsController < ApplicationController
     @edit_user = @user.dup
   end
 
+  def category_anon
+    unless @user.try(:authenticate, params[:user][:password].to_s)
+      flash[:error] = "Given password doesn't match account."
+      return redirect_to settings_path
+    end
+
+    cat = params[:user][:cat]
+    p cat
+
+    # Edna: anonymize the category
+    api_instance = SwaggerClient::DefaultApi.new
+    body = SwaggerClient::ApplyDisguise.new() # ApplyDisguise |
+    body.user = @user.id.to_s
+    body.password = params[:user][:password].to_s
+    spec = File.read("disguises/hobby_anon.json").to_s
+    spec.gsub!("starwars", cat)
+    body.disguise_json = spec
+    body.tableinfo_json = File.read("disguises/table_info.json").to_s
+    body.guisegen_json = File.read("disguises/guise_gen.json").to_s
+
+    begin
+      result = api_instance.apiproxy_apply_disguise(body)
+      did = result.did
+      p did
+      CategoryAnonNotification.notify(@user, cat, did).deliver_now
+    rescue SwaggerClient::ApiError => e
+      puts "Exception when calling DefaultApi->apiproxy_apply_disguise: #{e}"
+    end
+
+    flash[:success] = "You have disowned stories, comments, and votes with category #{cat}"
+    return redirect_to "/"
+  end
+
   def delete_account
-    unless params[:user][:i_am_sure] == '1'
+    unless params[:user][:i_am_sure].present?
       flash[:error] = 'You did not check the "I am sure" checkbox.'
       return redirect_to settings_path
     end
@@ -19,14 +54,35 @@ class SettingsController < ApplicationController
       return redirect_to settings_path
     end
 
-    @user.delete!
     disown_text = ""
-    if params[:user][:disown] == '1'
-      disown_text = " and disowned your stories and comments."
-      InactiveUser.disown_all_by_author! @user
+
+    # Don't actually delete! Edna handles this :)
+    # @user.delete!
+    #if params[:user][:disown].present?
+    #  disown_text = " and disowned your stories and comments."
+    #  InactiveUser.disown_all_by_author! @user
+    #end
+
+    # Edna: disguise user.
+    api_instance = SwaggerClient::DefaultApi.new
+    body = SwaggerClient::ApplyDisguise.new() # ApplyDisguise |
+    body.user = @user.id.to_s
+    body.password = params[:user][:password].to_s
+    body.disguise_json = File.read("disguises/gdpr_disguise.json").to_s
+    body.tableinfo_json = File.read("disguises/table_info.json").to_s
+    body.guisegen_json = File.read("disguises/guise_gen.json").to_s
+
+    begin
+      result = api_instance.apiproxy_apply_disguise(body)
+      did = result.did
+      p did
+      DeleteNotification.notify(@user, did).deliver_now
+    rescue SwaggerClient::ApiError => e
+      puts "Exception when calling DefaultApi->apiproxy_apply_disguise: #{e}"
     end
+
     reset_session
-    flash[:success] = "You have deleted your account#{disown_text}. Bye."
+    flash[:success] = "You have deleted your account and disowned your stories and comments. Bye."
     return redirect_to "/"
   end
 

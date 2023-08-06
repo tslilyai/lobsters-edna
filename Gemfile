@@ -7,6 +7,9 @@ gem "mysql2"
 # uncomment to use PostgreSQL
 # gem "pg"
 
+# edna client
+gem 'edna_client', '~> 1.0.0', path: "./edna_ruby_client"
+
 # rails
 gem 'scenic'
 gem 'scenic-mysql_adapter'
