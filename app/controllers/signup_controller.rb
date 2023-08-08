@@ -47,25 +47,26 @@ class SignupController < ApplicationController
   end
 
   def signup
-    if !Rails.application.open_signups?
-      if !(@invitation = Invitation.unused.where(:code => params[:invitation_code].to_s).first)
-        flash[:error] = "Invalid or expired invitation."
-        return redirect_to "/signup"
-      end
-    end
+    # always allow signups
+    #if !Rails.application.open_signups?
+    #  if !(@invitation = Invitation.unused.where(:code => params[:invitation_code].to_s).first)
+    #    flash[:error] = "Invalid or expired invitation."
+    #    return redirect_to "/signup"
+    #  end
+    #end
 
     @title = "Signup"
 
     @new_user = User.new(user_params)
 
-    if !Rails.application.open_signups?
-      @new_user.invited_by_user_id = @invitation.user_id
-    end
+    #if !Rails.application.open_signups?
+      #@new_user.invited_by_user_id = @invitation.user_id
+    #end
 
     if @new_user.save
-      if @invitation
-        @invitation.update(used_at: Time.current, new_user: @new_user)
-      end
+      #if @invitation
+        #@invitation.update(used_at: Time.current, new_user: @new_user)
+      #end
       session[:u] = @new_user.session_token
       flash[:success] = "Welcome to #{Rails.application.name}, " <<
                         "#{@new_user.username}!"
