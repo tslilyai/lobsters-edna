@@ -10,9 +10,9 @@ class SignupController < ApplicationController
       flash[:error] = "You are already signed up."
       return redirect_to "/"
     end
-    if Rails.application.open_signups?
-      redirect_to action: :invited, invitation_code: 'open' and return
-    end
+    #if Rails.application.open_signups?
+    redirect_to action: :invited, invitation_code: 'open' and return
+    #end
   end
 
   def invite
@@ -28,20 +28,20 @@ class SignupController < ApplicationController
       return redirect_to "/"
     end
 
-    if !Rails.application.open_signups?
-      if !(@invitation = Invitation.unused.where(:code => params[:invitation_code].to_s).first)
-        flash[:error] = "Invalid or expired invitation"
-        return redirect_to "/signup"
-      end
-    end
+    #if !Rails.application.open_signups?
+      #if !(@invitation = Invitation.unused.where(:code => params[:invitation_code].to_s).first)
+        #flash[:error] = "Invalid or expired invitation"
+        #return redirect_to "/signup"
+      #end
+    #end
 
     @title = "Signup"
 
     @new_user = User.new
 
-    if !Rails.application.open_signups?
-      @new_user.email = @invitation.email
-    end
+    #if !Rails.application.open_signups?
+      #@new_user.email = @invitation.email
+    #end
 
     render :action => "invited"
   end
