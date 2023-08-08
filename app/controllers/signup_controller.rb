@@ -88,7 +88,7 @@ class SignupController < ApplicationController
         #return redirect_to signup_invite_path
       #else
         return redirect_to root_path
-      end
+      #end
     else
       render :action => "invited"
     end

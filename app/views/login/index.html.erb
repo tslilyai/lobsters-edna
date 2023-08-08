@@ -26,20 +26,9 @@
         <%= link_to "Reset your password", forgot_password_path %>.
       </p>
 
-      <% if Rails.application.open_signups? %>
-        <p>
-          Not a user yet? <a href="/invitations/open">Sign up here</a>.
-        </p>
-      <% elsif Rails.application.allow_invitation_requests? %>
-        Not a user yet? <a href="/invitations/request">Request an invite</a>.
-      <% else %>
-        <p>
-        Not a user yet?
-        Read about <a href="/about#invitations">how invitations work</a> and see if you know
-        <a href="/u">a current user</a> of the site.
-        The <a href="/chat">chat room</a> does not require an invitation.
-        </p>
-      <% end %>
+      <p>
+        Not a user yet? <a href="/invitations/open">Sign up here</a>.
+      </p>
 
       <% if @referer.present? %>
         <%= form.hidden_field :referer, value: @referer %>
