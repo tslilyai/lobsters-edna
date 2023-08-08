@@ -9,17 +9,6 @@
 
     <%= errors_for(@new_user) %>
 
-    <% if not Rails.application.open_signups? %>
-        <%= f.hidden_field "invitation_code", :value => @invitation.code, :name => :invitation_code %>
-      <p>
-      <%= f.label :invitation, "Invited By:", :class => "required" %>
-      <span class="d">
-        <a href="/u/<%= @invitation.user.username %>" target="_blank"><%=
-          @invitation.user.username %></a>
-      </span>
-      </p>
-    <% end %>
-
     <p>
     <%= f.label :username, "Username:", :class => "required" %>
     <%= f.text_field :username, :size => 30 %>
