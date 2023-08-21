@@ -84,15 +84,8 @@ class SignupController < ApplicationController
          puts "Exception when calling DefaultApi->apiproxy_register_principal: #{e}"
        end
 
-      # XXX LYT This is only set in Lobsters production instances, just redirect to root
-      #if Rails.application.allow_new_users_to_invite?
-        #return redirect_to signup_invite_path
-      #else
-        return redirect_to root_path
-      #end
-    #else
-      #render :action => "invited"
-    #end
+      return redirect_to root_path
+    end
   end
 
 private
