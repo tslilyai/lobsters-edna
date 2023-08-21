@@ -289,6 +289,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_06_200248) do
     t.bigint "banned_by_user_id", unsigned: true
     t.string "banned_reason", limit: 200, collation: "utf8mb4_general_ci"
     t.datetime "deleted_at", precision: nil
+    t.datetime "last_login", precision: nil
     t.datetime "disabled_invite_at", precision: nil
     t.bigint "disabled_invite_by_user_id", unsigned: true
     t.string "disabled_invite_reason", limit: 200
