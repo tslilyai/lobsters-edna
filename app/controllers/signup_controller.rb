@@ -90,9 +90,9 @@ class SignupController < ApplicationController
       #else
         return redirect_to root_path
       #end
-    else
-      render :action => "invited"
-    end
+    #else
+      #render :action => "invited"
+    #end
   end
 
 private
