@@ -166,7 +166,7 @@ class UsersController < ApplicationController
      did = ids[1] # Integer |
      body.password = params[:password].to_s
      body.tableinfo_json = File.read("disguises/table_info.json").to_s
-     body.guisegen_json = File.read("disguises/guise_gen.json").to_s
+     body.ppgen_json = File.read("disguises/ppgen.json").to_s
 
      begin
        api_instance.apiproxy_reveal_disguise(body, uid, did)

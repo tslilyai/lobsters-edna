@@ -7,5 +7,5 @@ Name | Type | Description | Notes
 **disguise_json** | **String** |  | 
 **tableinfo_json** | **String** |  | 
 **password** | **String** |  | 
-**guisegen_json** | **String** |  | 
+**ppgen_json** | **String** |  | 
 

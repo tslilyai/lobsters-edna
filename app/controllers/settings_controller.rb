@@ -29,7 +29,7 @@ class SettingsController < ApplicationController
     spec.gsub!("starwars", cat)
     body.disguise_json = spec
     body.tableinfo_json = File.read("disguises/table_info.json").to_s
-    body.guisegen_json = File.read("disguises/guise_gen.json").to_s
+    body.ppgen_json = File.read("disguises/ppgen.json").to_s
 
     begin
       result = api_instance.apiproxy_apply_disguise(body)
@@ -70,7 +70,7 @@ class SettingsController < ApplicationController
     body.password = params[:user][:password].to_s
     body.disguise_json = File.read("disguises/gdpr_disguise.json").to_s
     body.tableinfo_json = File.read("disguises/table_info.json").to_s
-    body.guisegen_json = File.read("disguises/guise_gen.json").to_s
+    body.ppgen_json = File.read("disguises/ppgen.json").to_s
 
     begin
       result = api_instance.apiproxy_apply_disguise(body)

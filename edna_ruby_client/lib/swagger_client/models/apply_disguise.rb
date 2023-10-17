@@ -21,7 +21,7 @@ module SwaggerClient
 
     attr_accessor :password
 
-    attr_accessor :guisegen_json
+    attr_accessor :ppgen_json
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -30,7 +30,7 @@ module SwaggerClient
         :'disguise_json' => :'disguise_json',
         :'tableinfo_json' => :'tableinfo_json',
         :'password' => :'password',
-        :'guisegen_json' => :'guisegen_json'
+        :'ppgen_json' => :'ppgen_json'
       }
     end
 
@@ -41,7 +41,7 @@ module SwaggerClient
         :'disguise_json' => :'Object',
         :'tableinfo_json' => :'Object',
         :'password' => :'Object',
-        :'guisegen_json' => :'Object'
+        :'ppgen_json' => :'Object'
       }
     end
 
@@ -82,8 +82,8 @@ module SwaggerClient
         self.password = attributes[:'password']
       end
 
-      if attributes.key?(:'guisegen_json')
-        self.guisegen_json = attributes[:'guisegen_json']
+      if attributes.key?(:'ppgen_json')
+        self.ppgen_json = attributes[:'ppgen_json']
       end
     end
 
@@ -107,8 +107,8 @@ module SwaggerClient
         invalid_properties.push('invalid value for "password", password cannot be nil.')
       end
 
-      if @guisegen_json.nil?
-        invalid_properties.push('invalid value for "guisegen_json", guisegen_json cannot be nil.')
+      if @ppgen_json.nil?
+        invalid_properties.push('invalid value for "ppgen_json", ppgen_json cannot be nil.')
       end
 
       invalid_properties
@@ -121,7 +121,7 @@ module SwaggerClient
       return false if @disguise_json.nil?
       return false if @tableinfo_json.nil?
       return false if @password.nil?
-      return false if @guisegen_json.nil?
+      return false if @ppgen_json.nil?
       true
     end
 
@@ -134,7 +134,7 @@ module SwaggerClient
           disguise_json == o.disguise_json &&
           tableinfo_json == o.tableinfo_json &&
           password == o.password &&
-          guisegen_json == o.guisegen_json
+          ppgen_json == o.ppgen_json
     end
 
     # @see the `==` method
@@ -146,7 +146,7 @@ module SwaggerClient
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [user, disguise_json, tableinfo_json, password, guisegen_json].hash
+      [user, disguise_json, tableinfo_json, password, ppgen_json].hash
     end
 
     # Builds the object from hash
