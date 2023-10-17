@@ -87,30 +87,6 @@
                 "user_fk_cols": ["user_id"],
                 "group_by_cols": []
             }
-        },
-        {
-            "Modify": {
-                "pred": "True",
-                "from": "",
-                "col": "comment",
-                "gen_value": {
-                    "RandStr": {
-                        "len": 30
-                    }
-                }
-            }
-        },
-        {
-            "Modify": {
-                "pred": "True",
-                "from": "",
-                "col": "markeddown_comment",
-                "gen_value": {
-                    "RandStr": {
-                        "len": 30
-                    }
-                }
-            }
         }
     ],
     "stories": [
@@ -120,30 +96,6 @@
                 "pred": "True",
                 "user_fk_cols": ["user_id"],
                 "group_by_cols": []
-            }
-        },
-        {
-            "Modify": {
-                "from": "",
-                "pred": "True",
-                "col": "title",
-                "gen_value": {
-                    "RandStr": {
-                        "len": 30
-                    }
-                }
-            }
-        },
-        {
-            "Modify": {
-                "from": "",
-                "pred": "True",
-                "col": "url",
-                "gen_value": {
-                    "RandStr": {
-                        "len": 30
-                    }
-                }
             }
         }
     ],
