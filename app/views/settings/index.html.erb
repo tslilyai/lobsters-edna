@@ -298,21 +298,16 @@
   <div class="deletion">
     <%= form_with model: @edit_user, url: delete_account_path, method: :post, id: 'delete_user', namespace: 'delete_user' do |f| %>
 
-      <h2>Delete Account</h2>
+      <h2>Disguise Account</h2>
 
       <p>
-      To permanently delete your account, verify your current password below.
+      To disguise your account, verify your current password below.
       </p>
       <ul>
         <li>Your account will be put into a deleted state.</li>
-        <li>Your username will remain reserved and will not be available for any other account.</li>
-        <li>Your private messages will be deleted.</li>
-        <li>Your submitted stories will not be deleted.</li>
-        <li>
-          Your comments with negative scores will be deleted, and you can check "disown comments"
-          below if you want all of your stories and comments to change to list
-          <a href="/u/inactive-user">inactive-user</a> instead of your username.
-        </li>
+        <li>Your username will be removed until you return.</li>
+        <li>Your private messages and personal preferences will be removed.</li>
+        <li>Your submitted stories or comments will not be removed, but will be disowned and recorrelated with an anonymous user.</li>
       </ul>
 
       <div class="boxline">
@@ -322,11 +317,8 @@
       <div class="boxline">
         <%= f.label :i_am_sure, "I am sure:", :class => "required" %>
         <%= f.check_box :i_am_sure %>
-        <br />
-        <%= f.label :disown, "Disown stories/comments:" %>
-        <%= f.check_box :disown %> (optional)
       </div>
-      <%= f.submit "Yes, Delete My Account", :class => "deletion" %>
+      <%= f.submit "Yes, Disguise My Account", :class => "deletion" %>
     <% end %>
   </div>
 </div>
