@@ -161,9 +161,8 @@ class UsersController < ApplicationController
   def reveal_disguise
      api_instance = SwaggerClient::DefaultApi.new
      body = SwaggerClient::RevealDisguise.new # RevealDisguise |
-     ids = params[:ids].split('&', 2)
-     uid = ids[0].to_s # String |
-     did = ids[1] # Integer |
+     uid = params[:uid].to_s # String |
+     did = params[:did] # Integer |
      body.password = params[:password].to_s
      body.tableinfo_json = File.read("disguises/table_info.json").to_s
      body.ppgen_json = File.read("disguises/ppgen.json").to_s

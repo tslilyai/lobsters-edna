@@ -1,7 +1,8 @@
 <div class="box wide">
   <form method="POST" action="/users/reveal">
     <label for="password">Password:</label>
-    <input type="hidden" id="ids" name="ids" value=<%= params[:ids] %>/>
+    <input type="hidden" id="uid" name="uid" value=<%= params[:uid] %>/>
+    <input type="hidden" id="did" name="did" value=<%= params[:did] %>/>
     <input type="text" id="password" name="password"><br>
     <input type="submit"" value = "Reveal!"/>
   </form>
