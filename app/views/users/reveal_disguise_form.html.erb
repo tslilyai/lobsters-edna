@@ -1,7 +1,7 @@
 <div class="box wide">
-  <div class="legend">Reveal Sealed Data</div>
   <form method="POST" action="/users/reveal">
     <label for="password">Password:</label>
+    <input type="hidden" id="ids" name="ids" value=<%= params[:ids] %>/>
     <input type="text" id="password" name="password"><br>
     <input type="submit"" value = "Reveal!"/>
   </form>
