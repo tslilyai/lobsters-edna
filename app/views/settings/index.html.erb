@@ -296,6 +296,31 @@
   <br>
 
   <div class="deletion">
+    <%= form_with model: @edit_user, url: throwaway_path, method: :post, id: 'throwaway', namespace: 'throwaway' do |f| %>
+
+      <h2>Throwaway for Tag</h2>
+
+      <p>
+      Create a throwaway for the specified tag. Verify your current password below.
+      </p>
+
+      <div class="boxline">
+        <%= f.label :tag, "Tag to throwaway:", :class => "required" %>
+        <%= f.text_field :title, :maxlength => 100 %>
+      </div>
+      <div class="boxline">
+        <%= f.label :password, "Verify Password:", :class => "required" %>
+        <%= f.password_field :password, :size => 40, :autocomplete => "off" %>
+      </div>
+      <div class="boxline">
+        <%= f.label :i_am_sure, "I am sure:", :class => "required" %>
+        <%= f.check_box :i_am_sure %>
+      </div>
+      <%= f.submit "Yes, Disguise My Account", :class => "deletion" %>
+    <% end %>
+  </div>
+</div>
+  <div class="deletion">
     <%= form_with model: @edit_user, url: delete_account_path, method: :post, id: 'delete_user', namespace: 'delete_user' do |f| %>
 
       <h2>Disguise Account</h2>

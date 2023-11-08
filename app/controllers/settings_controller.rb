@@ -11,22 +11,21 @@ class SettingsController < ApplicationController
     @edit_user = @user.dup
   end
 
-  def category_anon
+  def throwaway 
     unless @user.try(:authenticate, params[:user][:password].to_s)
       flash[:error] = "Given password doesn't match account."
       return redirect_to settings_path
     end
-
-    cat = params[:user][:cat]
-    p cat
 
     # Edna: anonymize the category
     api_instance = SwaggerClient::DefaultApi.new
     body = SwaggerClient::ApplyDisguise.new() # ApplyDisguise |
     body.user = @user.id.to_s
     body.password = params[:user][:password].to_s
+    tag = params[:user][:tag].to_s
+    p tag
     spec = File.read("disguises/hobby_anon.json").to_s
-    spec.gsub!("starwars", cat)
+    spec.gsub!("starwars", tag)
     body.disguise_json = spec
     body.tableinfo_json = File.read("disguises/table_info.json").to_s
     body.ppgen_json = File.read("disguises/ppgen.json").to_s
@@ -35,12 +34,12 @@ class SettingsController < ApplicationController
       result = api_instance.apiproxy_apply_disguise(body)
       did = result.did
       p did
-      CategoryAnonNotification.notify(@user, cat, did).deliver_now
+      ThrowawayNotification.notify(@user, cat, did).deliver_now
     rescue SwaggerClient::ApiError => e
       puts "Exception when calling DefaultApi->apiproxy_apply_disguise: #{e}"
     end
 
-    flash[:success] = "You have disowned stories, comments, and votes with category #{cat}"
+    flash[:success] = "You have disowned stories, comments, and votes with tag #{tag}"
     return redirect_to "/"
   end
 

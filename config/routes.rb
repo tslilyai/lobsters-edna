@@ -151,10 +151,10 @@ Rails.application.routes.draw do
 
   get "/settings" => "settings#index"
   post "/settings" => "settings#update"
+post "/settings/throwaway" => "settings#throwaway",
+    :as => "throwaway"
   post "/settings/delete_account" => "settings#delete_account",
     :as => "delete_account"
-  post "/settings/category_anon" => "settings#category_anon",
-    :as => "category_anon"
   get "/settings/2fa" => "settings#twofa", :as => "twofa"
   post "/settings/2fa_auth" => "settings#twofa_auth", :as => "twofa_auth"
   get "/settings/2fa_enroll" => "settings#twofa_enroll",
