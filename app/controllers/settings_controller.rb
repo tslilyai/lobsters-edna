@@ -34,7 +34,7 @@ class SettingsController < ApplicationController
       result = api_instance.apiproxy_apply_disguise(body)
       did = result.did
       p did
-      ThrowawayNotification.notify(@user, cat, did).deliver_now
+      ThrowawayNotification.notify(@user, tag, did).deliver_now
     rescue SwaggerClient::ApiError => e
       puts "Exception when calling DefaultApi->apiproxy_apply_disguise: #{e}"
     end

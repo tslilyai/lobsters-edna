@@ -316,10 +316,13 @@
         <%= f.label :i_am_sure, "I am sure:", :class => "required" %>
         <%= f.check_box :i_am_sure %>
       </div>
-      <%= f.submit "Yes, Disguise My Account", :class => "deletion" %>
+      <%= f.submit "Yes, Create a Throwaway", :class => "deletion" %>
     <% end %>
   </div>
-</div>
+  
+  <br>
+  <br>
+
   <div class="deletion">
     <%= form_with model: @edit_user, url: delete_account_path, method: :post, id: 'delete_user', namespace: 'delete_user' do |f| %>
 
