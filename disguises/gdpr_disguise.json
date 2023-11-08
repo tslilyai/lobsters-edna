@@ -81,11 +81,9 @@
     ],
     "comments": [
         {
-            "Decor": {
-                "pred": "True",
+            "Remove": {
                 "from": "",
-                "user_fk_cols": ["user_id"],
-                "group_by_cols": []
+                "pred": "True"
             }
         }
     ],
