@@ -174,11 +174,7 @@ class="story <%= story.vote && story.vote[:vote] == 1 ? "upvoted" : "" %>
           <span class="comments_label">
             <span> | </span>
             <a role="heading" aria-level="2" href="<%= story.comments_path %>">
-            <% if story.comments_count == 0 %>
-              no comments</a>
-            <% else %>
-              <%= story.comments_count %> <%= 'comment'.pluralize(story.comments_count) %></a>
-            <% end %>
+              comments</a>
           </span>
         <% end %>
 
